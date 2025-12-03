@@ -69,11 +69,11 @@ abline(fit, lwd = 2, lty = 2, col = "firebrick")
 lines(lowess(dat$gdp, dat$happinessScore), lwd = 2, col = "darkgreen")  # green smooth
 
 # Add r, p, n in bottom-right
-txt <- paste0("Pearson r = ", round(r, 3),
-              "\np = ", format(p, scientific=TRUE, digits=2),
-              "\nn = ", n)
-usr <- par("usr")
-text(usr[2], usr[3], txt, adj = c(1, 0), cex = 0.9, col = "grey20")
+#txt <- paste0("Pearson r = ", round(r, 3),
+#              "\np = ", format(p, scientific=TRUE, digits=2),
+#             "\nn = ", n)
+#usr <- par("usr")
+#text(usr[2], usr[3], txt, adj = c(1, 0), cex = 0.9, col = "grey20")
 
 legend("topleft",
        legend = c("Countries", "Regression line (lm)", "LOWESS smooth"),
