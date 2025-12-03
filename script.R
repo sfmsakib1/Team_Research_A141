@@ -149,3 +149,27 @@ text(x = h2$mids,
 par(mfrow = c(1, 1))  # reset
 
 
+#-------------------------------
+#.        contingency table
+#--------------------------------
+
+
+
+# turned both numeric variables into 3 categories
+dat$gdp_cat <- cut(dat$gdp,
+                   breaks = quantile(dat$gdp, probs = c(0, 1/3, 2/3, 1), na.rm = TRUE),
+                   include.lowest = TRUE,
+                   labels = c("Low GDP", "Mid GDP", "High GDP"))
+
+dat$happy_cat <- cut(dat$happinessScore,
+                     breaks = quantile(dat$happinessScore, probs = c(0, 1/3, 2/3, 1), na.rm = TRUE),
+                     include.lowest = TRUE,
+                     labels = c("Low Happy", "Mid Happy", "High Happy"))
+
+# Contingency table
+tab <- table(dat$gdp_cat, dat$happy_cat)
+tab
+
+# Row proportions (proportion of happiness categories within each GDP category)
+round(prop.table(tab, margin = 1), 3)
+
