@@ -47,9 +47,9 @@ summary_table <- data.frame(
 cat("\n--- Summary table ---\n")
 print(summary_table)
 
-# ================================================
+# ------------------------------------------------
 # MAIN PLOT: Scatterplot with regression line
-# ================================================
+# -------------------------------------------------
 
 # Regression line fitting from a linear model
 fit <- lm(happinessScore ~ gdp, data=dat)
@@ -94,3 +94,58 @@ label_idx <- unique(c(out3))
 text(dat$gdp[label_idx], dat$happinessScore[label_idx],
      labels = dat$country[label_idx],
      pos = 4, cex = 0.75, col = "black")
+
+
+# ----------------------------------------
+# SUPPLEMENTARY GRAPH: Histograms
+# -------------------------------------
+par(mfrow = c(1, 2))  # two plots side-by-side
+
+h <- hist(dat$gdp, breaks = 20, plot = FALSE)
+ticks <- seq(0, max(h$breaks), length.out = 5)
+
+hist(dat$gdp, breaks = h$breaks,
+     xlim = range(ticks),
+     ylim = c(0, max(h$counts) * 1.15),
+     main = "GDP per capita",
+     xlab = "GDP per capita (index)",
+     ylab = "Number of countries",
+     col  = "skyblue", border = "white",
+     xaxt = "n")
+
+axis(1, at = ticks, labels = round(ticks, 2))
+
+# Add count labels on top of each bar
+text(x = h$mids,
+     y = h$counts,
+     labels = h$counts,
+     pos = 3,          # above the bar
+     cex = 0.8,
+     col = "black")
+
+
+
+h2   <- hist(dat$happinessScore, breaks = 20, plot = FALSE)
+xmax <- max(h2$breaks)
+ymax <- max(h2$counts)
+
+hist(dat$happinessScore, breaks = h2$breaks,
+     xlim = c(2, xmax),
+     ylim = c(0, ymax * 1.25),
+     main = "Happiness score",
+     xlab = "Happiness score",
+     ylab = "Number of countries",
+     col  = "skyblue",
+     border = "white")
+
+# Add count labels on top of each bar
+text(x = h2$mids,
+     y = h2$counts,
+     labels = h2$counts,
+     pos = 3,        # above the bar
+     cex = 0.8,
+     col = "black")
+
+par(mfrow = c(1, 1))  # reset
+
+
