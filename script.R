@@ -84,7 +84,7 @@ dev.off()
 # ----------------------------------------------------------
 # 3) Scatterplot + Regression line
 # ----------------------------------------------------------
-png("Scatterplot.png", width = 1200, height = 900)
+png("scatterplot.png", width = 1200, height = 900)
 
 # Regression line fitting from a linear model
 fit <- lm(happiness ~ gdp, data=df)
