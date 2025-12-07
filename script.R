@@ -11,56 +11,62 @@
 
 df <- read.csv("2019.csv", check.names = FALSE)
 
-# Change column names
-dat <- data.frame(
-  country   = df[["Country or region"]],
-  happiness = df[["Score"]],
-  gdp       = df[["GDP per capita"]]
-)
-#remove all null values
-dat <- na.omit(dat)
+# Rename the columns names
+colnames(df)[2] <- "country"
+colnames(df)[3] <- "happiness"
+colnames(df)[4] <- "gdp"
 
-dat
+# Removes rows containing null/NA values.
+df <- na.omit(df)
+
+df
 
 # ----------------------------------------------------------
 # 2) HISTOGRAMS (Check normality for choosing test)
 # ----------------------------------------------------------
 
-par(mfrow = c(1, 2))  # two plots side-by-side
+# ----------------------------------------------------------
+# Happiness Histogram : Dependent variable (outcome)
+# ----------------------------------------------------------
+png("hist_happiness.png", width = 1200, height = 900)
+h <- hist(df$happiness, breaks = 20, plot = FALSE)
+xmax <- max(h$breaks)
+ymax <- max(h$counts)
 
-h <- hist(dat$gdp, breaks = 20, plot = FALSE)
-ticks <- seq(0, max(h$breaks), length.out = 5)
-
-hist(dat$gdp, breaks = h$breaks,
-     xlim = range(ticks),
-     ylim = c(0, max(h$counts) * 1.15),
-     main = "Histogram of GDP per capita",
-     xlab = "GDP per capita (index)",
+hist(df$happiness,
+     breaks = h$breaks,
+     xlim = c(2, xmax),
+     ylim = c(0, ymax * 1.25), 
+     main = "Histogram of Happiness Score (2019)",
+     xlab = "Happiness score",
      ylab = "Number of countries",
-     col  = "skyblue", border = "white",
-     xaxt = "n")
-
-axis(1, at = ticks, labels = round(ticks, 2))
+     col  = "skyblue",
+     border = "white")
 
 # Add count labels on top of each bar
 text(x = h$mids,
      y = h$counts,
      labels = h$counts,
-     pos = 3,          # above the bar
+     pos = 3,        # above the bar
      cex = 0.8,
      col = "black")
 
+dev.off()
 
+# ----------------------------------------------------------
+# GDP Histogram : Independent variable (predictor)
+# ----------------------------------------------------------
+png("hist_gdp.png", width = 1200, height = 900)
+h2 <- hist(df$gdp, breaks = 20, plot = FALSE)
+xmax2 <- max(h2$breaks)
+ymax2 <- max(h2$counts)
 
-h2   <- hist(dat$happiness, breaks = 20, plot = FALSE)
-xmax <- max(h2$breaks)
-ymax <- max(h2$counts)
-
-hist(dat$happiness, breaks = h2$breaks,
-     xlim = c(2, xmax),
-     ylim = c(0, ymax * 1.25),
-     main = "Histogram of Happiness score ",
-     xlab = "Happiness score",
+hist(df$gdp,
+     breaks = h2$breaks, 
+     xlim = c(0, xmax2),
+     ylim = c(0, ymax2 * 1.25),
+     main = "Histogram of GDP per capita (2019)",
+     xlab = "GDP per capita",
      ylab = "Number of countries",
      col  = "skyblue",
      border = "white")
@@ -70,10 +76,10 @@ text(x = h2$mids,
      y = h2$counts,
      labels = h2$counts,
      pos = 3,        # above the bar
-     cex = 0.8,
+     cex = 1.2,
      col = "black")
 
-par(mfrow = c(1, 1))  # reset
+dev.off()
 
 # ----------------------------------------------------------
 # 3) Scatterplot + Regression line
