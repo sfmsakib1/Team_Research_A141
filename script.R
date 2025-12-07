@@ -84,12 +84,13 @@ dev.off()
 # ----------------------------------------------------------
 # 3) Scatterplot + Regression line
 # ----------------------------------------------------------
+png("Scatterplot.png", width = 1200, height = 900)
 
 # Regression line fitting from a linear model
-fit <- lm(happiness ~ gdp, data=dat)
+fit <- lm(happiness ~ gdp, data=df)
 
 # Plot with colors
-plot(dat$gdp, dat$happiness,
+plot(df$gdp, df$happiness,
      pch = 16,
      col = rgb(0.1, 0.4, 0.9, 0.55),  # semi-transparent blue points
      xlab = "GDP per capita",
@@ -100,7 +101,7 @@ plot(dat$gdp, dat$happiness,
 # use to draw the regression line
 abline(fit, lwd = 2, lty = 2, col = "firebrick")
 # red dashed line
-lines(lowess(dat$gdp, dat$happiness), lwd = 2, col = "darkgreen")  # green smooth
+lines(lowess(df$gdp, df$happiness), lwd = 2, col = "darkgreen")  # green smooth
 
 legend("topleft",
        legend = c("Countries", "Regression line (lm)", "LOWESS smooth"),
@@ -109,25 +110,26 @@ legend("topleft",
        lwd = c(NA, 2, 3),
        col = c(rgb(0.1, 0.4, 0.9, 0.55), "firebrick", "darkgreen"),
        bty = "n")
+dev.off()
 
 # ------------------------------------------------------------
 # 4) Correlation Test: pearson (After checking histograms)
 # ------------------------------------------------------------
 
-cor_out <- cor.test(dat$gdp, dat$happiness, method = "pearson")
+cor_out <- cor.test(df$gdp, df$happiness, method = "pearson")
 
 r <- unname(cor_out$estimate)
 #person r
 p <- cor_out$p.value
 #p-value
-n <- nrow(dat)
+n <- nrow(df)
 #number of rows used in test
 
 cat("\n--- Correlation test ---\n")
 #print full test results
 print(cor_out)
 
-cor_out <- cor.test(dat$gdp, dat$happiness, method = "pearson")
+cor_out <- cor.test(df$gdp, df$happiness, method = "pearson")
 print(cor_out)
 
 # ------------------------------------------------------------
@@ -135,14 +137,14 @@ print(cor_out)
 # ------------------------------------------------------------
 summary_table <- data.frame(
   n = n,
-  happiness_mean = mean(dat$happiness),
-  happiness_sd   = sd(dat$happiness),
-  happiness_min  = min(dat$happiness),
-  happiness_max  = max(dat$happiness),
-  gdp_mean = mean(dat$gdp),
-  gdp_sd   = sd(dat$gdp),
-  gdp_min  = min(dat$gdp),
-  gdp_max  = max(dat$gdp)
+  happiness_mean = mean(df$happiness),
+  happiness_sd   = sd(df$happiness),
+  happiness_min  = min(df$happiness),
+  happiness_max  = max(df$happiness),
+  gdp_mean = mean(df$gdp),
+  gdp_sd   = sd(df$gdp),
+  gdp_min  = min(df$gdp),
+  gdp_max  = max(df$gdp)
 )
 
 cat("\n--- Summary table ---\n")
@@ -153,21 +155,21 @@ print(summary_table)
 # ------------------------------------------------------------
 
 # turned both numeric variables into 3 categories
-dat$gdp_cat <- cut(dat$gdp,
-                   breaks = quantile(dat$gdp, 
+df$gdp_cat <- cut(df$gdp,
+                   breaks = quantile(df$gdp, 
                                      probs = c(0, 1/3, 2/3, 1), na.rm = TRUE),
                    include.lowest = TRUE,
                    labels = c("Low GDP", "Mid GDP", "High GDP")
                    )
 
-dat$happy_cat <- cut(dat$happiness,
-                     breaks = quantile(dat$happiness, 
+df$happy_cat <- cut(df$happiness,
+                     breaks = quantile(df$happiness, 
                                        probs = c(0, 1/3, 2/3, 1), na.rm = TRUE),
                      include.lowest = TRUE,
                      labels = c("Low Happy", "Mid Happy", "High Happy")
                      )
 
-tab <- table(dat$gdp_cat, dat$happy_cat)
+tab <- table(df$gdp_cat, df$happy_cat)
 tab
 
 # Row proportions (proportion of happiness categories within each GDP category)
