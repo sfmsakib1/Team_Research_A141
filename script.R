@@ -161,29 +161,3 @@ summary_table <- data.frame(
 
 cat("\n--- Summary table ---\n")
 print(summary_table)
-
-# ------------------------------------------------------------
-# 6) Contingency table
-# ------------------------------------------------------------
-
-# turned both numeric variables into 3 categories
-df$gdp_cat <- cut(df$gdp,
-                   breaks = quantile(df$gdp, 
-                                     probs = c(0, 1/3, 2/3, 1), na.rm = TRUE),
-                   include.lowest = TRUE,
-                   labels = c("Low GDP", "Mid GDP", "High GDP")
-                   )
-
-df$happy_cat <- cut(df$happiness,
-                     breaks = quantile(df$happiness, 
-                                       probs = c(0, 1/3, 2/3, 1), na.rm = TRUE),
-                     include.lowest = TRUE,
-                     labels = c("Low Happy", "Mid Happy", "High Happy")
-                     )
-
-tab <- table(df$gdp_cat, df$happy_cat)
-tab
-
-# Row proportions (proportion of happiness categories within each GDP category)
-round(prop.table(tab, margin = 1), 3)
-
