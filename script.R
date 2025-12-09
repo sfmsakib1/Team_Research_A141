@@ -21,8 +21,43 @@ df <- na.omit(df)
 
 df
 
+
+
 # ----------------------------------------------------------
-# 2) HISTOGRAMS (Check normality for choosing test)
+# 2) Main Plot = Scatterplot with Regression line
+# ----------------------------------------------------------
+png("scatterplot.png", width = 1200, height = 900)
+
+# Regression line fitting from a linear model
+fit <- lm(happiness ~ gdp, data=df)
+
+# Plot with colors
+plot(df$gdp, df$happiness,
+     pch = 16,
+     col = rgb(0.1, 0.4, 0.9, 0.55),  # semi-transparent blue points
+     xlab = "GDP per capita",
+     ylab = "Happiness score",
+     main = "GDP per capita vs Happiness Score (2019)",
+     panel.first = grid(col = "grey85", lty = "dotted"))
+
+# use to draw the regression line
+abline(fit, lwd = 2, lty = 2, col = "firebrick")
+# red dashed line
+lines(lowess(df$gdp, df$happiness), lwd = 2, col = "darkgreen")  # green smooth
+
+legend("topleft",
+       legend = c("Countries", "Regression line (lm)", "LOWESS smooth"),
+       pch = c(16, NA, NA),
+       lty = c(NA, 2, 1),
+       lwd = c(NA, 2, 3),
+       col = c(rgb(0.1, 0.4, 0.9, 0.55), "firebrick", "darkgreen"),
+       bty = "n")
+dev.off()
+
+
+
+# ----------------------------------------------------------
+# 3) HISTOGRAMS (Check normality for choosing test)
 # ----------------------------------------------------------
 
 # ----------------------------------------------------------
@@ -56,61 +91,34 @@ dev.off()
 # ----------------------------------------------------------
 # GDP Histogram : Independent variable (predictor)
 # ----------------------------------------------------------
+
+
+h2 <- hist(dat$gdp, breaks = 20, plot = FALSE)
+#use seq to create ticks for the x-axis
+ticks <- seq(0, max(h2$breaks), length.out = 5)
+
 png("hist_gdp.png", width = 1200, height = 900)
-h2 <- hist(df$gdp, breaks = 20, plot = FALSE)
-xmax2 <- max(h2$breaks)
-ymax2 <- max(h2$counts)
 
-hist(df$gdp,
-     breaks = h2$breaks, 
-     xlim = c(0, xmax2),
-     ylim = c(0, ymax2 * 1.25),
-     main = "Histogram of GDP per capita (2019)",
-     xlab = "GDP per capita",
+hist(dat$gdp, breaks = h2$breaks,
+     xlim = range(ticks),
+     ylim = c(0, max(h2$counts) * 1.15),
+     main = "GDP per capita",
+     xlab = "GDP per capita (index)",
      ylab = "Number of countries",
-     col  = "skyblue",
-     border = "white")
+     col  = "skyblue", border = "white",
+     xaxt = "n")
 
-# Add count labels on top of each bar
+axis(1, at = ticks, labels = round(ticks, 2))
+
 text(x = h2$mids,
      y = h2$counts,
      labels = h2$counts,
-     pos = 3,        # above the bar
-     cex = 1.2,
+     pos = 3,
+     cex = 0.8,
      col = "black")
 
 dev.off()
 
-# ----------------------------------------------------------
-# 3) Scatterplot + Regression line
-# ----------------------------------------------------------
-png("scatterplot.png", width = 1200, height = 900)
-
-# Regression line fitting from a linear model
-fit <- lm(happiness ~ gdp, data=df)
-
-# Plot with colors
-plot(df$gdp, df$happiness,
-     pch = 16,
-     col = rgb(0.1, 0.4, 0.9, 0.55),  # semi-transparent blue points
-     xlab = "GDP per capita",
-     ylab = "Happiness score",
-     main = "GDP per capita vs Happiness Score (2019)",
-     panel.first = grid(col = "grey85", lty = "dotted"))
-
-# use to draw the regression line
-abline(fit, lwd = 2, lty = 2, col = "firebrick")
-# red dashed line
-lines(lowess(df$gdp, df$happiness), lwd = 2, col = "darkgreen")  # green smooth
-
-legend("topleft",
-       legend = c("Countries", "Regression line (lm)", "LOWESS smooth"),
-       pch = c(16, NA, NA),
-       lty = c(NA, 2, 1),
-       lwd = c(NA, 2, 3),
-       col = c(rgb(0.1, 0.4, 0.9, 0.55), "firebrick", "darkgreen"),
-       bty = "n")
-dev.off()
 
 # ------------------------------------------------------------
 # 4) Correlation Test: pearson (After checking histograms)
