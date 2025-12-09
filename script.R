@@ -12,8 +12,12 @@
 df <- read.csv("2019.csv", check.names = FALSE)
 
 # Rename the columns names
+# Rename the 2nd column "Country or region" of  df to "country"
 colnames(df)[2] <- "country"
+# Rename the 3rd column "Score" of df to "happiness"
 colnames(df)[3] <- "happiness"
+# Rename the 4th column "GDP per capita" of df to "gdp"
+
 colnames(df)[4] <- "gdp"
 
 # Removes rows containing null/NA values.
@@ -102,7 +106,7 @@ png("hist_gdp.png", width = 1200, height = 900)
 hist(dat$gdp, breaks = h2$breaks,
      xlim = range(ticks),
      ylim = c(0, max(h2$counts) * 1.15),
-     main = "GDP per capita",
+     main = "Histogram of GDP per capita",
      xlab = "GDP per capita (index)",
      ylab = "Number of countries",
      col  = "skyblue", border = "white",
@@ -114,7 +118,7 @@ text(x = h2$mids,
      y = h2$counts,
      labels = h2$counts,
      pos = 3,
-     cex = 0.8,
+     cex = 1.2,
      col = "black")
 
 dev.off()
