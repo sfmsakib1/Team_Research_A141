@@ -44,17 +44,17 @@ plot(df$gdp, df$happiness,
      main = "GDP per capita vs Happiness Score (2019)",
      panel.first = grid(col = "grey85", lty = "dotted"))
 
-# use to draw the regression line
+# use to draw the regression line (red dashed line)
 abline(fit, lwd = 2, lty = 2, col = "firebrick")
-# red dashed line
-lines(lowess(df$gdp, df$happiness), lwd = 2, col = "darkgreen")  # green smooth
+
+#lines(lowess(df$gdp, df$happiness), lwd = 2, col = "darkgreen")  # green smooth
 
 legend("topleft",
-       legend = c("Countries", "Regression line (lm)", "LOWESS smooth"),
-       pch = c(16, NA, NA),
-       lty = c(NA, 2, 1),
-       lwd = c(NA, 2, 3),
-       col = c(rgb(0.1, 0.4, 0.9, 0.55), "firebrick", "darkgreen"),
+       legend = c("Countries", "Regression line (lm)"),
+       pch = c(16, NA),
+       lty = c(NA, 2),
+       lwd = c(NA, 2),
+       col = c(rgb(0.1, 0.4, 0.9, 0.55), "firebrick"),
        bty = "n")
 dev.off()
 
