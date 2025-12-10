@@ -30,11 +30,15 @@ df
 # ----------------------------------------------------------
 # 2) Main Plot = Scatterplot with Regression line
 # ----------------------------------------------------------
-png("scatterplot.png", width = 1200, height = 900)
+#png("scatterplot.png", width = 1200, height = 900)
+
+png("scatterplot.png",
+    width = 8, height = 6, units = "in", res = 300,
+    pointsize = 14)
 
 # Regression line fitting from a linear model
 fit <- lm(happiness ~ gdp, data=df)
-
+par(cex=1.2)
 # Plot with colors
 plot(df$gdp, df$happiness,
      pch = 16,
@@ -67,7 +71,12 @@ dev.off()
 # ----------------------------------------------------------
 # Happiness Histogram : Dependent variable (outcome)
 # ----------------------------------------------------------
-png("hist_happiness.png", width = 1200, height = 900)
+#png("hist_happiness.png", width = 1200, height = 900)
+
+png("hist_happiness.png",
+    width = 8, height = 6, units = "in", res = 300,
+    pointsize = 14)
+
 h <- hist(df$happiness, breaks = 20, plot = FALSE)
 xmax <- max(h$breaks)
 ymax <- max(h$counts)
@@ -101,7 +110,11 @@ h2 <- hist(dat$gdp, breaks = 20, plot = FALSE)
 #use seq to create ticks for the x-axis
 ticks <- seq(0, max(h2$breaks), length.out = 5)
 
-png("hist_gdp.png", width = 1200, height = 900)
+png("hist_gdp.png",
+    width = 8, height = 6, units = "in", res = 300,
+    pointsize = 14)
+
+#png("hist_gdp.png", width = 1200, height = 900)
 
 hist(dat$gdp, breaks = h2$breaks,
      xlim = range(ticks),
