@@ -30,11 +30,15 @@ df
 # ----------------------------------------------------------
 # 2) Main Plot = Scatterplot with Regression line
 # ----------------------------------------------------------
-png("scatterplot.png", width = 1200, height = 900)
+#png("scatterplot.png", width = 1200, height = 900)
+
+png("scatterplot.png",
+    width = 8, height = 6, units = "in", res = 300,
+    pointsize = 14)
 
 # Regression line fitting from a linear model
 fit <- lm(happiness ~ gdp, data=df)
-
+par(cex=1.2)
 # Plot with colors
 plot(df$gdp, df$happiness,
      pch = 16,
@@ -44,17 +48,17 @@ plot(df$gdp, df$happiness,
      main = "GDP per capita vs Happiness Score (2019)",
      panel.first = grid(col = "grey85", lty = "dotted"))
 
-# use to draw the regression line
+# use to draw the regression line (red dashed line)
 abline(fit, lwd = 2, lty = 2, col = "firebrick")
-# red dashed line
-lines(lowess(df$gdp, df$happiness), lwd = 2, col = "darkgreen")  # green smooth
+
+#lines(lowess(df$gdp, df$happiness), lwd = 2, col = "darkgreen")  # green smooth
 
 legend("topleft",
-       legend = c("Countries", "Regression line (lm)", "LOWESS smooth"),
-       pch = c(16, NA, NA),
-       lty = c(NA, 2, 1),
-       lwd = c(NA, 2, 3),
-       col = c(rgb(0.1, 0.4, 0.9, 0.55), "firebrick", "darkgreen"),
+       legend = c("Countries", "Regression line (lm)"),
+       pch = c(16, NA),
+       lty = c(NA, 2),
+       lwd = c(NA, 2),
+       col = c(rgb(0.1, 0.4, 0.9, 0.55), "firebrick"),
        bty = "n")
 dev.off()
 
@@ -67,7 +71,12 @@ dev.off()
 # ----------------------------------------------------------
 # Happiness Histogram : Dependent variable (outcome)
 # ----------------------------------------------------------
-png("hist_happiness.png", width = 1200, height = 900)
+#png("hist_happiness.png", width = 1200, height = 900)
+
+png("hist_happiness.png",
+    width = 8, height = 6, units = "in", res = 300,
+    pointsize = 14)
+
 h <- hist(df$happiness, breaks = 20, plot = FALSE)
 xmax <- max(h$breaks)
 ymax <- max(h$counts)
@@ -101,7 +110,11 @@ h2 <- hist(dat$gdp, breaks = 20, plot = FALSE)
 #use seq to create ticks for the x-axis
 ticks <- seq(0, max(h2$breaks), length.out = 5)
 
-png("hist_gdp.png", width = 1200, height = 900)
+png("hist_gdp.png",
+    width = 8, height = 6, units = "in", res = 300,
+    pointsize = 14)
+
+#png("hist_gdp.png", width = 1200, height = 900)
 
 hist(dat$gdp, breaks = h2$breaks,
      xlim = range(ticks),
