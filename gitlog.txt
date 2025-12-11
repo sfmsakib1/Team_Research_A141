@@ -1,0 +1,72 @@
+* 0415f28 Updated final report
+*   462077f Updated the word count of section 3
+|\  
+| * 72052ee change in 5.2
+* | abc91cb Change word count in accordance with the limit.
+|/  
+* 62cd30e updated report for word count compliance
+* ef92beb Updated
+* 2ea45b1 update
+* a23d70e Updated report: fixed layout formatting and added new edits to the introduction
+* ddc741f Updated final report with correct conclusion and fixed duplicate
+*   dd40a7f arrange 1.3
+|\  
+| * 04d07ea updated the visualisation section and add plots as well
+| * f748630 updated code for plot size and resoultion modificaion
+| * 085c8b6 Updated the size and resolution of all the plots
+| * fa2a020 Remove the smooth curve line from the scatterplot and generated the new plot.
+* | 71e1495 test changes
+|/  
+* ad261a6 update id
+* 861e5c2 Removed the contingency table as histogram is added and which is a better choice by the analysis
+* d7fa3be Add the comments for columns rename and save the Histogram of GDP with updated axis in PNG format
+* ee02e44 Fix the issue of (Histogram of GDP) x-axis which is cutting off at the end and update the formatting and position of the sections according to the requirements.
+* c44a6e3 evaluation changes
+*   fee57bf updated document
+|\  
+| * 7989cb6 Added full conclusion to final report
+| * 34d8f88 Delete 7COM1079_Final report (2).docx
+| * e26edd6 presentation
+| * 5312989 clean
+| * c57f592 Added full conclusion section to final report
+* | eaf17c6 updated document
+|/  
+* 0625bb7  evaluation: git output comment
+* 455ed9d  evaluation: overall judgement
+* 2ae4c37  Evaluation : Groups_Time_Management
+* a761339  Evaluation : point_for_improvement
+* 82032ef  Evaluation :what went well
+* 88f529e  modified stistical hypothesis
+* 2ff3565 added my ID
+* e8c75c2 analysis written with statistical tests and hypothesis
+* 8c8d95a generate graph for scatterplot
+* 7159027 generate graphs in png format
+* b1edd83 delete screenshot
+* 1412e5e delete temp
+* 4c354dc Cleaned code and commented
+*   16df688 Merge pull request #1 from sfmsakib1/haider/visual
+|\  
+| * e7a8738 saving new updated image of scatter plot
+| * 14147f9 update the scatter plot makes it more cleaner and readable by removing excessive information
+| * 16e28f7 update the scatterplot and add the image agian
+| * 9c00ef9 generate histograms form the code and store result as a image
+| * 3286554 saved the scatterplot generated from the output of the code
+| * de49609 also added contingency table which shows propotions for both gdp and score columns
+| * f2588be added two histograms for comparison of propotions among score and gdp
+| * 9246c72 added the scatter plot with regression line with labels and some important information on the plot
+| * 88dd6e4 added the summary table by which have mean,sd,min and max of both score and GDP columns
+| * 3207263 add the person test for the data displaying pearson r, p-value, and number of rows.
+| * 3e208f3 start working with the dataset and preprocess it for the futhur work
+* | 1d19188 Added section 2.2
+* |   eceeedf merge
+|\ \  
+| * | d9a2ab9 Added Section 2 Background Research
+* | | 5bd178f ID added
+|/ /  
+* | 9b38d40 delete duplicate
+* | 31aa6e6 Added Section 1 Introduction
+|/  
+* ad1d737 template file added
+* a9548e7 git ignore file added
+* a9d9ea8 check
+* 953b6a0 1st commit
