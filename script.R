@@ -106,7 +106,7 @@ dev.off()
 # ----------------------------------------------------------
 
 
-h2 <- hist(dat$gdp, breaks = 20, plot = FALSE)
+h2 <- hist(df$gdp, breaks = 20, plot = FALSE)
 #use seq to create ticks for the x-axis
 ticks <- seq(0, max(h2$breaks), length.out = 5)
 
@@ -116,7 +116,7 @@ png("hist_gdp.png",
 
 #png("hist_gdp.png", width = 1200, height = 900)
 
-hist(dat$gdp, breaks = h2$breaks,
+hist(df$gdp, breaks = h2$breaks,
      xlim = range(ticks),
      ylim = c(0, max(h2$counts) * 1.15),
      main = "Histogram of GDP per capita",
