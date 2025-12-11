@@ -1,3 +1,7 @@
+* 78d7780 Submit final report: GDP-Happiness correlation analysis (2019)
+* b33aa3a updated code in docs
+* 1af0ce2 Finalised the code.
+* baa727f create and add the git log output
 * 0415f28 Updated final report
 *   462077f Updated the word count of section 3
 |\  
